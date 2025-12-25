@@ -1,0 +1,21 @@
+# Base image
+FROM python
+FROM pytorch/pytorch:2.7.1-cuda11.8-cudnn9-runtime
+
+# ตั้ง working directory
+WORKDIR /app
+
+# copy dependency
+COPY requirements.txt .
+
+# install dependency
+RUN pip install --no-cache-dir -r requirements.txt
+
+# copy source code
+COPY . .
+
+# เปิด port
+EXPOSE 5000
+
+# run app
+CMD ["python", "app.py"]
